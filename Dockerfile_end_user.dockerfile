@@ -21,25 +21,8 @@ RUN \
 
 
 # Installing
-# --- update & upgrade
-RUN apt update && DEBIAN_FRONTEND=noninteractive apt install -y lubuntu-desktop
 
-RUN rm /run/reboot-required*
 
-# creating user
-RUN useradd -m deeptrust -p $(openssl passwd deep)
-RUN usermod -aG sudo deeptrust
-
-# xrdp
-RUN apt install -y xrdp
-RUN adduser xrdp ssl-cert
-
-RUN sed -i '3 a echo "\
-export GNOME_SHELL_SESSION_MODE=lubuntu\\n\
-export XDG_SESSION_TYPE=x11\\n\
-export XDG_CURRENT_DESKTOP=LXQt\\n\
-export XDG_CONFIG_DIRS=/etc/xdg/xdg-Lubuntu:/etc/xdg\\n\
-" > ~/.xsessionrc' /etc/xrdp/startwm.sh
 
 RUN apt-get update > /dev/null; apt-get upgrade -y > /dev/null;
 
@@ -75,14 +58,6 @@ ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 RUN node --version
 RUN npm --version
 
-# --- aws-cli
-RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip";
-RUN unzip awscliv2.zip;
-RUN ./aws/install;
-
-# --- aws-cdk
-RUN npm install -g aws-cdk;
-RUN cdk --version;
 
 # --- time
 RUN apt-get install -y time;
@@ -101,17 +76,11 @@ RUN \
     apt-get -y install xauth; \
     apt-get -y install ffmpeg; 
 
-EXPOSE 8887
-EXPOSE 3389
+ # Getting code from GitHub & Compiling
 
-    
-RUN apt-get -y install xterm
-RUN apt-get -y install gvfs-backends
-RUN apt-get -y install lxqt-panel
+EXPOSE 8081
 
 
-
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 USER root
 
@@ -125,16 +94,19 @@ service xrdp start ; \
 lxqt-panel; \
 # starting ssh server
 /etc/init.d/ssh start; \
-# Getting code from GitHub & Compiling
-echo "Compiling / Downloading dependancies"; \
 cd ~; \
-wget https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_30mb.mp4; \
-git clone https://github.com/FELLAH-tech/stream.git; \
-git clone https://github.com/Dash-Industry-Forum/dash.js.git; \
-cp -r dash.js stream/streaming/views; \
-cd stream/streaming; \
+git clone https://github.com/medahalli/WebRTC.git; \
+cd WebRTC; \
 #launching the app
 npm install; \
-node server.js \
+npm install express; \
+npm install pug; \
+npm install express-session; \
+npm install connect-sqlite3; \
+npm install sqlite3 sqlite; \
+node install.js; \
+node db.js; \
+node db_debug.js; \
+npm start; \
 # terminal [Optional]
 bash
