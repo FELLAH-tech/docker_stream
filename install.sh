@@ -12,10 +12,3 @@ sudo apt-get update;
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin;
 sudo docker run hello-world;
 systemctl start docker;
-
-# remmina install
-sudo apt-add-repository ppa:remmina-ppa-team/remmina-next;
-sudo apt update;
-sudo apt install remmina remmina-plugin-rdp remmina-plugin-secret;
-
-sudo killall remmina;
