@@ -1,22 +1,20 @@
-# Welcome to docker_stream project!
+# P2P Video Conferencing using WebRTC, Node.js, and Socket.io
 
+This project is a peer-to-peer video conferencing application that utilizes WebRTC for real-time communication, a Node.js server with Socket.io for signaling, and a frontend built with Node.js and Pug.
 
-## Requirements :
-If you already have docker and remmina skip this part ! else run this
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+You will need to have Node.js and npm (Node Package Manager) installed on your system. You can download and install them from the official Node.js website: https://nodejs.org/en/
+
+### Installation
+
+1. Clone the repository to your local machine:
 
 ```
-$ ./install.sh
-```
-
-After installing the dependencies run this script !
+$ git clone https://github.com/<username>/p2p-video-conferencing.git
 
 ```
-$ ./create_image.sh
-```
-After launching this you will press Ok button and then enter the password deep*/L very quickly ! otherwise the firefox icon will not appear !
-
-Then open firefox and browse http://localhost:3000/ !
-
-You wan upload an existing video in the root folder !
-
-Enjoy this first version :) 
