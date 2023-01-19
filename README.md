@@ -26,7 +26,7 @@ https://tools.ietf.org/html/rfc5389
 
 ## Project Architecture
 
-![Screenshot](Diagramme sans nom.drawio.svg)
+![Screenshot](archi.svg)
 
 The architecture of the project can be broken down into 3 main components:
 
